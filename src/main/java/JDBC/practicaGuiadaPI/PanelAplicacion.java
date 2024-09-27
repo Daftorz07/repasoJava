@@ -12,6 +12,11 @@ public class PanelAplicacion extends JPanel{
 
     public PanelAplicacion() {
 
+        //Properties
+        JComboBox selector;
+        JComboBox edades;
+        JTextArea resultado;
+
         //Panel for the table of Contents
         JPanel menus = new JPanel();
         menus.setLayout(new FlowLayout());

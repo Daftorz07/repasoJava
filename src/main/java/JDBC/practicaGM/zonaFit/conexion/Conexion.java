@@ -34,7 +34,11 @@ public class Conexion {
 
         Connection comm = Conexion.getConexion();
 
-        System.out.println("Conexion: " + comm);
+        if (comm != null){
+            System.out.println("Connection successfully");
+        }else {
+            System.out.println("Connection failed");
+        }
     }
 
 }

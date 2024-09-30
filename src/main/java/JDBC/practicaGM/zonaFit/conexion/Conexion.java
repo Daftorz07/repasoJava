@@ -1,7 +1,12 @@
 package JDBC.practicaGM.zonaFit.conexion;
 
+import JDBC.practicaGM.zonaFit.datos.ClienteDAO;
+import JDBC.practicaGM.zonaFit.datos.IClienteDAO;
+import JDBC.practicaGM.zonaFit.dominio.Cliente;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.List;
 
 public class Conexion {
 
@@ -33,11 +38,27 @@ public class Conexion {
     public static void main(String[] args) {
 
         Connection comm = Conexion.getConexion();
+        IClienteDAO clienteDAO = new ClienteDAO();
 
         if (comm != null){
             System.out.println("Connection successfully");
         }else {
             System.out.println("Connection failed");
+        }
+
+        //Test listar Clientes
+        System.out.println("*** Listar Clientes ***");
+        List<Cliente> clientes = clienteDAO.listarCliente();
+        //clientes.forEach(System.out::println);
+
+        //Test Buscar Cliente por ID
+        Cliente cliente = new Cliente(2); //Sobrecarga de constructores
+        System.out.println("Cliente antes de la búsqueda: " + cliente);
+        boolean clienteEncontrado = clienteDAO.buscarCliente(cliente);
+        if (clienteEncontrado){
+            System.out.println("Cliente encontrado: " + cliente);
+        }else {
+            System.out.println("Cliente no existe: " + cliente.getId());
         }
     }
 

@@ -13,13 +13,13 @@ import java.util.List;
 
 public class ClienteDAO implements IClienteDAO {
 
-    //Flujo de datos SQL
-    PreparedStatement newPreparedStatement;
-    ResultSet newResultSet;
-    Connection connection;
-
     @Override
     public List<Cliente> listarCliente() {
+
+        //Flujo de datos SQL
+        PreparedStatement newPreparedStatement;
+        ResultSet newResultSet;
+        Connection connection;
 
         //Obtenemos la conexion
         connection = Conexion.getConexion();
@@ -28,7 +28,7 @@ public class ClienteDAO implements IClienteDAO {
         List<Cliente> clientes = new ArrayList<>();
 
         //SQL a ejecutar
-        String sql = "SELECT * FROM CLIENTES ORDER BY ID";
+        String sql = "SELECT * FROM CLIENTES ORDER BY ID_CLIENTE";
 
         try {
             //Preparamos y ejecutamos la sentencia SQL
@@ -42,7 +42,7 @@ public class ClienteDAO implements IClienteDAO {
                 Cliente cliente = new Cliente();
 
                 //Seteando los datos del cliente
-                cliente.setId(newResultSet.getInt("id"));
+                cliente.setId(newResultSet.getInt("id_cliente"));
                 cliente.setUserName(newResultSet.getString("userName"));
                 cliente.setLastName(newResultSet.getString("lastName"));
                 cliente.setMembership(newResultSet.getInt("membership"));
@@ -57,7 +57,7 @@ public class ClienteDAO implements IClienteDAO {
             System.out.println("--------------------------------");
             throw new RuntimeException(e);
 
-        }finally {
+        } finally {
             try {
                 //El cierre de la conexion puede generar una exception
                 connection.close();
@@ -71,6 +71,44 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public boolean buscarCliente(Cliente cliente) {
+
+        //Flujo de datos SQL
+        PreparedStatement newPreparedStatement;
+        ResultSet newResultSet;
+        Connection connection;
+
+        connection = Conexion.getConexion();
+        String sql = "SELECT * FROM CLIENTES WHERE ID_CLIENTE = ?";
+
+        try {
+
+            newPreparedStatement = connection.prepareStatement(sql);
+            newPreparedStatement.setInt(1, cliente.getId());
+
+            newResultSet = newPreparedStatement.executeQuery();
+
+            if (newResultSet.next()) {
+                cliente.setUserName(newResultSet.getString("userName"));
+                cliente.setLastName(newResultSet.getString("lastName"));
+                cliente.setMembership(newResultSet.getInt("membership"));
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error al buscar cliente por id: " + e.getClass().getName());
+            System.out.println("Motivo: " + e.getMessage());
+            System.out.println("--------------------------------");
+            throw new RuntimeException(e);
+
+        } finally {
+            try {
+                //El cierre de la conexion puede generar una exception
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Se genero un error de tipo: " + e.getClass().getName());
+                throw new RuntimeException(e);
+            }
+        }
         return false;
     }
 

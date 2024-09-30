@@ -35,6 +35,7 @@ public class Conexion {
         return newConnection;
     }
 
+    //Test connection e implementation methods
     public static void main(String[] args) {
 
         Connection comm = Conexion.getConexion();
@@ -52,9 +53,9 @@ public class Conexion {
         //clientes.forEach(System.out::println);
 
         //Test Buscar Cliente por ID
-        Cliente cliente = new Cliente(2); //Sobrecarga de constructores
+        Cliente cliente = new Cliente(49); //Sobrecarga de constructores
         System.out.println("Cliente antes de la búsqueda: " + cliente);
-        boolean clienteEncontrado = clienteDAO.buscarCliente(cliente);
+        boolean clienteEncontrado = clienteDAO.buscarClienteID(cliente);
         if (clienteEncontrado){
             System.out.println("Cliente encontrado: " + cliente);
         }else {

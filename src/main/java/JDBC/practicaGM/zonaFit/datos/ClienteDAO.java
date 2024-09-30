@@ -70,7 +70,7 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public boolean buscarCliente(Cliente cliente) {
+    public boolean buscarClienteID(Cliente cliente) {
 
         //Flujo de datos SQL
         PreparedStatement newPreparedStatement;

@@ -79,5 +79,28 @@ public class Conexion {
         }else {
             System.out.println("Cliente no agregado: " + newCliente);
         }
+
+        // ------------------------------------------------------------------------------------
+        //Test Actualizar Cliente -------------------------------------------------------------
+        // ------------------------------------------------------------------------------------
+        Cliente updateCliente = new Cliente(49, "Fernando", "Torres", 7);
+        boolean clienteActualizado = clienteDAO.modificarCliente(updateCliente);
+        if (clienteActualizado){
+            System.out.println("Cliente Actualizado: " + updateCliente);
+        }else {
+            System.out.println("Cliente no Actualizado: " + updateCliente);
+        }
+
+        // ------------------------------------------------------------------------------------
+        //Test Eliminar Cliente ---------------------------------------------------------------
+        // ------------------------------------------------------------------------------------
+        Cliente deleteCliente = new Cliente(49); //Sobrecarga de constructores
+        boolean clienteEliminado = clienteDAO.eliminarCliente(deleteCliente);
+        if (clienteEliminado){
+            System.out.println("Cliente Eliminado: " + deleteCliente);
+        }else {
+            System.out.println("Cliente no Eliminado: " + deleteCliente);
+        }
+
     }
 }

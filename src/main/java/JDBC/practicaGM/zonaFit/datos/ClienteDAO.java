@@ -105,7 +105,7 @@ public class ClienteDAO implements IClienteDAO {
                 //El cierre de la conexion puede generar una exception
                 connection.close();
             } catch (SQLException e) {
-                System.out.println("Se genero un error de tipo: " + e.getClass().getName());
+                System.out.println("Se genero un error el intentar cerrar la conexion: " + e.getClass().getName());
                 throw new RuntimeException(e);
             }
         }
@@ -114,7 +114,45 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public boolean agregarCliente(Cliente cliente) {
-        return false;
+
+        //Flujo de datos SQL
+        PreparedStatement newPreparedStatement;
+        Connection connection;
+        connection = Conexion.getConexion();
+
+        // Parametros Posicionales
+        String sqlInsert = "INSERT INTO CLIENTES(userName, lastName, membership) VALUES (?,?,?)";
+
+        try {
+            //Se carga la consulta SQL
+            newPreparedStatement = connection.prepareStatement(sqlInsert);
+
+            //Seteando los datos SQL
+            newPreparedStatement.setString(1, cliente.getUserName());
+            newPreparedStatement.setString(2, cliente.getLastName());
+            newPreparedStatement.setInt(3, cliente.getMembership());
+
+            //Ejecutando la consulta
+            newPreparedStatement.execute();
+
+            return true;
+
+        }catch (Exception e) {
+            System.out.println("Error al buscar cliente por id: " + e.getClass().getName());
+            System.out.println("Motivo: " + e.getMessage());
+            System.out.println("--------------------------------");
+            throw new RuntimeException(e);
+
+        } finally {
+            try {
+                //El cierre de la conexion puede generar una exception
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Se genero un error el intentar cerrar la conexion: " + e.getClass().getName());
+                throw new RuntimeException(e);
+            }
+        }
+        //return false;
     }
 
     @Override

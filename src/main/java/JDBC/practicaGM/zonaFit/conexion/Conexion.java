@@ -38,6 +38,9 @@ public class Conexion {
     //Test connection e implementation methods
     public static void main(String[] args) {
 
+        // -----------------------------------------------------------------------------------
+        //Test connection --------------------------------------------------------------------
+        // -----------------------------------------------------------------------------------
         Connection comm = Conexion.getConexion();
         IClienteDAO clienteDAO = new ClienteDAO();
 
@@ -47,12 +50,16 @@ public class Conexion {
             System.out.println("Connection failed");
         }
 
-        //Test listar Clientes
+        // -----------------------------------------------------------------------------------
+        //Test listar Clientes ---------------------------------------------------------------
+        // -----------------------------------------------------------------------------------
         System.out.println("*** Listar Clientes ***");
         List<Cliente> clientes = clienteDAO.listarCliente();
-        //clientes.forEach(System.out::println);
+        clientes.forEach(System.out::println);
 
-        //Test Buscar Cliente por ID
+        // ------------------------------------------------------------------------------------
+        // Test Buscar Cliente por ID ---------------------------------------------------------
+        // ------------------------------------------------------------------------------------
         Cliente cliente = new Cliente(49); //Sobrecarga de constructores
         System.out.println("Cliente antes de la búsqueda: " + cliente);
         boolean clienteEncontrado = clienteDAO.buscarClienteID(cliente);
@@ -61,6 +68,16 @@ public class Conexion {
         }else {
             System.out.println("Cliente no existe: " + cliente.getId());
         }
-    }
 
+        // ------------------------------------------------------------------------------------
+        //Test Agregar Cliente ----------------------------------------------------------------
+        // ------------------------------------------------------------------------------------
+        Cliente newCliente = new Cliente("David", "Torres", 2);
+        boolean clienteAgregado = clienteDAO.agregarCliente(newCliente);
+        if (clienteAgregado){
+            System.out.println("Cliente agregado: " + newCliente);
+        }else {
+            System.out.println("Cliente no agregado: " + newCliente);
+        }
+    }
 }

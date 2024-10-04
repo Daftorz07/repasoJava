@@ -154,5 +154,6 @@ public class ZonaFitAppConsola {
             }
         }
         return salirApp;
+        //Pendiente la creación de la aplicacion usando Spring Boot
     }
 }

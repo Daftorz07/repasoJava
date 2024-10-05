@@ -63,16 +63,16 @@ public class ZonaFitAppConsola {
             }
             case 2 -> {
                 //Buscar Cliente por ID
-                System.out.println("Ingrese el ID del Cliente a buscar: ");
+                System.out.print("Ingrese el ID del Cliente a buscar: ");
 
                 int idCliente = Integer.parseInt(consola.nextLine());
                 Cliente newCliente = new Cliente(idCliente);
                 boolean findCliente = clienteDAO.buscarClienteID(newCliente);
 
                 if (findCliente){
-                    System.out.println("\nCliente encontrado: " + findCliente);
+                    System.out.println("\nCliente encontrado: " + newCliente);
                 }else {
-                    System.out.println("\nCliente no encontrado: " + findCliente);
+                    System.out.println("\nCliente no encontrado: " + newCliente);
                 }
             }
             case 3 -> {

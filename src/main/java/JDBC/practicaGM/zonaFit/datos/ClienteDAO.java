@@ -31,7 +31,7 @@ public class ClienteDAO implements IClienteDAO {
         List<Cliente> clientes = new ArrayList<>();
 
         //SQL a ejecutar
-        String sql = "SELECT * FROM CLIENTES ORDER BY ID_CLIENTE";
+        String sql = "SELECT * FROM CLIENTE ORDER BY ID_CLIENTE";
 
         try {
             //Preparamos y ejecutamos la sentencia SQL
@@ -46,8 +46,8 @@ public class ClienteDAO implements IClienteDAO {
 
                 //Seteando los datos del cliente
                 cliente.setId(newResultSet.getInt("id_cliente"));
-                cliente.setUserName(newResultSet.getString("userName"));
-                cliente.setLastName(newResultSet.getString("lastName"));
+                cliente.setUserName(newResultSet.getString("user_name"));
+                cliente.setLastName(newResultSet.getString("last_name"));
                 cliente.setMembership(newResultSet.getInt("membership"));
 
                 //Agregando el cliente a la lista de clientes
@@ -84,7 +84,7 @@ public class ClienteDAO implements IClienteDAO {
         Connection connection;
 
         connection = Conexion.getConexion();
-        String sql = "SELECT * FROM CLIENTES WHERE ID_CLIENTE = ?";
+        String sql = "SELECT * FROM CLIENTE WHERE ID_CLIENTE = ?";
 
         try {
 
@@ -94,8 +94,8 @@ public class ClienteDAO implements IClienteDAO {
             newResultSet = newPreparedStatement.executeQuery();
 
             if (newResultSet.next()) {
-                cliente.setUserName(newResultSet.getString("userName"));
-                cliente.setLastName(newResultSet.getString("lastName"));
+                cliente.setUserName(newResultSet.getString("user_name"));
+                cliente.setLastName(newResultSet.getString("last_name"));
                 cliente.setMembership(newResultSet.getInt("membership"));
                 return true;
             }
@@ -130,7 +130,7 @@ public class ClienteDAO implements IClienteDAO {
         connection = Conexion.getConexion();
 
         // Parametros Posicionales
-        String sqlInsert = "INSERT INTO CLIENTES(userName, lastName, membership) VALUES (?,?,?)";
+        String sqlInsert = "INSERT INTO CLIENTE(user_name, last_name, membership) VALUES (?,?,?)";
 
         try {
             //Se carga la consulta SQL
@@ -176,7 +176,7 @@ public class ClienteDAO implements IClienteDAO {
         connection = Conexion.getConexion();
 
         // Parametros Posicionales
-        String sqlUpdate = "UPDATE CLIENTES SET userName = ?, lastName = ?, membership = ? WHERE id_cliente = ?";
+        String sqlUpdate = "UPDATE CLIENTE SET user_name = ?, last_name = ?, membership = ? WHERE id_cliente = ?";
 
         try {
             //Se carga la consulta SQL
@@ -222,7 +222,7 @@ public class ClienteDAO implements IClienteDAO {
         connection = Conexion.getConexion();
 
         // Parametros Posicionales
-        String sqlDelete = "DELETE FROM CLIENTES WHERE id_cliente = ?";
+        String sqlDelete = "DELETE FROM CLIENTE WHERE id_cliente = ?";
 
         try {
             //Se carga la consulta SQL

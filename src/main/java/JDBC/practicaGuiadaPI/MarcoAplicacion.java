@@ -21,7 +21,6 @@ public class MarcoAplicacion extends JFrame {
          * * Configuring the framework of the application.
          * ----------------------------------------------------------------
          */
-
         setSize(500, 400);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,8 +32,6 @@ public class MarcoAplicacion extends JFrame {
          * * Panel for the table of Contents
          * ----------------------------------------------------------------
          */
-
-
         //Panel for the table of Contents
         JPanel menus = new JPanel();
         menus.setLayout(new FlowLayout());
@@ -45,7 +42,6 @@ public class MarcoAplicacion extends JFrame {
         selector.addItem("Edades");
         menus.add(label);
         menus.add(selector);
-
 
         resultado = new JTextArea(17, 50);
         resultado.setEditable(false);
@@ -69,9 +65,7 @@ public class MarcoAplicacion extends JFrame {
          * * Connection to database
          * ----------------------------------------------------------------
          */
-
         try {
-
             //1-Conexion to database
             newConnection = Conexion.getConnection();
 
@@ -86,7 +80,6 @@ public class MarcoAplicacion extends JFrame {
             while (newResultSet.next()) { //Mientras exista un siguiente registro
 
                 selector.addItem(newResultSet.getString("EDAD"));
-
             }
         } catch (SQLException e) {
 
@@ -95,8 +88,6 @@ public class MarcoAplicacion extends JFrame {
             System.out.println("--------------------------------");
             throw new RuntimeException(e);
         }
-
-
     }
 
     private void ejecutarConsulta() {
@@ -104,6 +95,8 @@ public class MarcoAplicacion extends JFrame {
         ResultSet newResultSet = null;
 
         try {
+            //Reseteamos la información dentro del resultado (TextArea)
+            resultado.setText("");
 
             String edadSeleccionada = (String) selector.getSelectedItem();
 
@@ -120,6 +113,7 @@ public class MarcoAplicacion extends JFrame {
 
             //3.1-Recorremos los datos obtenidos
             resultado.append("\n Personas con edad de " + edadSeleccionada + " años");
+
             while (newResultSet.next()) {
                 resultado.append("\n -- ");
                 resultado.append(newResultSet.getString("nombre"));
@@ -128,7 +122,6 @@ public class MarcoAplicacion extends JFrame {
                 resultado.append(" tiene una edad de: ");
                 resultado.append(newResultSet.getString("edad"));
             }
-
         } catch (SQLException e) {
 
             System.out.println("Se genero un error de tipo: " + e.getClass().getName());
@@ -136,7 +129,5 @@ public class MarcoAplicacion extends JFrame {
             System.out.println("--------------------------------");
             throw new RuntimeException(e);
         }
-
-
     }
 }

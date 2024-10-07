@@ -40,7 +40,5 @@ public class PanelAplicacion extends JPanel{
         add(menus, BorderLayout.NORTH);
         add(resultado, BorderLayout.CENTER);
         add(btnConsultar, BorderLayout.SOUTH);
-
-
     }
 }
